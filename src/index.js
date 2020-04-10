@@ -13,6 +13,10 @@ const resolvers = {
 	Query: {
 		info: () => 'A hackernews website',
 		feed: () => links,
+		link: (parent, args) => {
+			const link = links.filter(link => link.id === args.id);
+			return link[0];
+		}
 	},
 	// GraphQL actually infers this!
 	// Link: {
@@ -29,7 +33,25 @@ const resolvers = {
       };
       links.push(link);
       return link;
-    }
+		},
+		updateLink: (parent, args) => {
+			// args.id, url, description;
+			console.log('updateLink()');
+			links = links.filter(link => link.id !== args.id);
+			const link = {
+				id: args.id,
+				description: args.description,
+				url: args.url
+			};
+			links.push(link);
+			return link;
+		},
+		deleteLink: (parent, args) => {
+			console.log('deleteLink()');
+			const linkToDelete = links.filter(link => link.id === args.id);
+			links = links.filter(link => link.id !== args.id);
+			return linkToDelete[0];
+		}
   },  
 }
 
