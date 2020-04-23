@@ -7,7 +7,6 @@ const feed = async (parent, args, context, info) => {
     ],
   } : {};
 
-
   const links = await context.prisma.links({
     where,
     skip: args.skip,
@@ -28,6 +27,12 @@ const feed = async (parent, args, context, info) => {
   }
 }
 
+const users = async (parent, args, context, info) => {
+  const users = await context.prisma.users();
+
+  return users;
+}
+
 // TODO: Implement link
 // link: (parent, args) => {
 // 	const link = links.filter(link => link.id === args.id);
@@ -36,4 +41,5 @@ const feed = async (parent, args, context, info) => {
 
 module.exports = {
   feed,
+  users
 }

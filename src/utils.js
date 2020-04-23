@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const APP_SECRET = 'GraphQL-is-aw3some';
 
 // TODO: refactor this into "auth service"
-// TODO: Bearer tokens should expire after a time
+// TODO: Bearer tokens should expire after a time, implement sessions
 const getUserId = (context) => {
   const Authorization = context.request.get('Authorization')
   if (Authorization) {
